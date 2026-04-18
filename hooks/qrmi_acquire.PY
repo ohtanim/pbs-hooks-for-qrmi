@@ -23,21 +23,38 @@ RES_TYPE_MAP = {
     "pasqal-local": ResourceType.PasqalLocal,
 }
 
+# Default is 6 hours
+DEFAULT_WALLTIME = 21600 
+
+# Default PBS_HOME
+DEFAULT_PBS_HOME = "/var/spool/pbs"
+
+def get_pbs_home():
+    """Read PBS_HOME from /etc/pbs.conf"""
+    try:
+        with open("/etc/pbs.conf", "r", encoding="utf-8") as conf_file:
+            for line in conf_file:
+                line = line.strip()
+                if line.startswith("PBS_HOME="):
+                    return line.split("=", 1)[1]
+    except OSError:
+        pass
+    return DEFAULT_PBS_HOME  # fallback
+
 
 e = pbs.event()
 j = e.job
 
 try:
-    if j.Variable_List is None:
-        j.Variable_List = {}
-
     resources = j.Variable_List.get("SLURM_JOB_QPU_RESOURCES")
     if resources is None:
         e.accept()
 
     walltime = j.Resource_List["walltime"]
+    if walltime is None:
+        walltime = DEFAULT_WALLTIME
 
-    cfg_path = os.path.join("/var/spool/pbs", "mom_priv", "qrmi_config.json")
+    cfg_path = os.path.join(get_pbs_home(), "mom_priv", "qrmi_config.json")
     with open(cfg_path, "r", encoding="utf8") as f:
         cfg_json = json.load(f)
         cfg_by_name = {r["name"]: r for r in cfg_json["resources"]}
@@ -84,7 +101,7 @@ try:
                 j.Variable_List[f"{name}_QRMI_JOB_ACQUISITION_TOKEN"] = token
                 pbs.logmsg(
                     pbs.EVENT_DEBUG,
-                    f"{name}, {cfg["type"]} acquired: {token}",
+                    f"{name}, {cfg['type']} acquired: {token}",
                 )
 
                 # if resource acquisition succeeded, add this resource to verified list
