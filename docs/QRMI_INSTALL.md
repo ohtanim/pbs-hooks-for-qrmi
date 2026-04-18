@@ -61,3 +61,11 @@ Hook qrmi_release
     fail_action = none
 ```
 
+## For PBS Users
+The following steps must be executed for each user who will use PBS.
+```bash
+python3.12 -m venv ~/pyenv
+source ~/pyenv/bin/activate
+pip install --upgrade pip
+pip install qrmi
+```
