@@ -1,9 +1,9 @@
 # Installing QRMI
 
-## Clone this github repository
+## Clone this pbs-hooks-for-qrmi github repository
 ```bash
 cd ~
-git clone https://github.com/ohtanim/pbs-hooks-for-qrmi
+git clone https://github.com/ohtanim/pbs-hooks-for-qrmi.git
 ```
 
 ## Install QRMI to PBS cluster
