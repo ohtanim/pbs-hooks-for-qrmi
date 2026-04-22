@@ -12,8 +12,11 @@
 
 ### Installing dependencies for PBS
 ```bash
+sudo dnf install epel-release
+sudo crb enable
+sudo dnf update
 sudo dnf install -y dnf-plugins-core
-sudo dnf install -y gcc make rpm-build libtool hwloc-devel libX11-devel libXt-devel libedit-devel libical-devel ncurses-devel perl postgresql-devel postgresql-contrib python3-devel tcl-devel tk-devel swig expat-devel openssl-devel libXext libXft autoconf automake gcc-c++ cjson
+sudo dnf install -y gcc make rpm-build libtool hwloc-devel libX11-devel libXt-devel libedit-devel libical-devel ncurses-devel perl postgresql-devel postgresql-contrib python3-devel tcl-devel tk-devel swig expat-devel openssl-devel libXext libXft autoconf automake gcc-c++ cjson python312 python3.12-devel cjson-devel git
 sudo dnf install -y expat libedit postgresql-server postgresql-contrib python3 sendmail sudo tcl tk libical
 ```
 
@@ -66,6 +69,7 @@ sudo rm /etc/rc.d/init.d/pbs
 The following initialization script must be executed for each user who will use PBS.
 ```bash
 . /etc/profile.d/pbs.sh
+sudo rm /etc/rc.d/init.d/pbs
 ```
 
 ### Start PBS
