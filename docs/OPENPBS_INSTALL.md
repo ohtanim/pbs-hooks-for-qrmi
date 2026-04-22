@@ -16,7 +16,7 @@ sudo dnf install epel-release
 sudo crb enable
 sudo dnf update
 sudo dnf install -y dnf-plugins-core
-sudo dnf install -y gcc make rpm-build libtool hwloc-devel libX11-devel libXt-devel libedit-devel libical-devel ncurses-devel perl postgresql-devel postgresql-contrib python3-devel tcl-devel tk-devel swig expat-devel openssl-devel libXext libXft autoconf automake gcc-c++ cjson python312 python3.12-devel cjson-devel git
+sudo dnf install -y gcc make rpm-build libtool hwloc-devel libX11-devel libXt-devel libedit-devel libical-devel ncurses-devel perl postgresql-devel postgresql-contrib python3-devel tcl-devel tk-devel swig expat-devel openssl-devel libXext libXft autoconf automake gcc-c++ cjson python312 python3.12-devel python3.12-pip cjson-devel git
 sudo dnf install -y expat libedit postgresql-server postgresql-contrib python3 sendmail sudo tcl tk libical
 ```
 
